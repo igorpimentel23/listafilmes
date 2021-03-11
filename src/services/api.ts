@@ -1,7 +1,9 @@
 import axios from 'axios';
 
-const api = axios.create({
+export const apiTrakt = axios.create({
   baseURL: 'https://api.trakt.tv',
 });
 
-export default api;
+export const apiTmdb = axios.create({
+  baseURL: 'https://api.themoviedb.org/3',
+});

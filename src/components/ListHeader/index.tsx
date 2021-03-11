@@ -1,14 +1,11 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { View, TextInput } from 'react-native';
 import { FormHandles } from '@unform/core';
 
-import { useDispatch, useStore } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Input from '../Input';
 import Button from '../Button';
 
-import api from '../../services/api';
-import { traktClientId, tmdbApiKey } from '../../assets/secrets';
-import { IItemsArray, Item } from '../../@types';
 import { Container, Title, FormStyled } from './styles';
 import storeSearch from '../../store/modules/search/actions';
 
@@ -18,23 +15,8 @@ const ListHeader: React.FC = () => {
   const searchInputRef = useRef<TextInput>(null);
 
   const handleSearch = useCallback(
-    async (query: string) => {
-      try {
-        const response = await api.get(`/search/movie`, {
-          params: {
-            query: query.search,
-          },
-          headers: {
-            'Content-Type': 'application/json',
-            'trakt-api-version': '2',
-            'trakt-api-key': traktClientId,
-          },
-        });
-
-        dispatch(storeSearch(response.data));
-      } catch (err) {
-        console.log(err);
-      }
+    query => {
+      dispatch(storeSearch(query.search));
     },
     [dispatch],
   );

@@ -17,27 +17,36 @@ import {
   CardTitleTextWrapper,
 } from './styles';
 import ListHeader from '../../components/ListHeader';
-import ListEmpty from '../../components/ListEmpty';
+import ListStatus from '../../components/ListStatus';
 import { IState } from '../../store';
-import { Item } from '../../@types';
+import { IItemsArray } from '../../@types';
 
 const Home: React.FC = () => {
-  const search = useSelector<IState, Item[]>(state => state.search.items);
+  const { items, isLoading, hasError } = useSelector<IState, IItemsArray>(
+    state => state.search,
+  );
+
+  const isEmpty = items.length === 0;
 
   return (
     <ItemsList
-      data={search}
+      data={items}
       ListHeaderComponent={<ListHeader />}
-      ListEmptyComponent={<ListEmpty />}
+      ListEmptyComponent={
+        <ListStatus
+          isEmpty={isEmpty}
+          isLoading={isLoading}
+          hasError={!!hasError}
+        />
+      }
       numColumns={2}
-      keyExtractor={item => String(item.movie.ids.trakt)}
+      keyExtractor={item => String(item.movie.ids.tmdb)}
       renderItem={({ item }) => (
         <Card>
           <CardContainer>
             <CardImage
               source={{
-                uri:
-                  'https://image.tmdb.org/t/p/w154/5VTN0pR8gcqV3EPUHHfMGnJYN9L.jpg',
+                uri: item.poster,
               }}
             />
             <CardMeta>
@@ -49,11 +58,13 @@ const Home: React.FC = () => {
               </CardTitle>
               <CardYear>
                 <Icon name="calendar-today" />
-                <CardYearText>1923</CardYearText>
+                <CardYearText>
+                  {item.movie.year ? item.movie.year : '---'}
+                </CardYearText>
               </CardYear>
               <CardRating>
                 <Icon name="star" />
-                <CardRatingText>79%</CardRatingText>
+                <CardRatingText>{item.rating}</CardRatingText>
               </CardRating>
             </CardMeta>
           </CardContainer>
