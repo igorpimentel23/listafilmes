@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, { useEffect, useRef } from 'react';
+import { Animated, Easing, View } from 'react-native';
 import { Container, Icon, EmptyText } from './styles';
 
 interface IListProps {
@@ -9,11 +9,31 @@ interface IListProps {
 }
 
 const ListEmpty: React.FC<IListProps> = ({ isEmpty, isLoading, hasError }) => {
+  const spinValue = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (isLoading) {
+      Animated.timing(spinValue, {
+        toValue: 1,
+        duration: 1000,
+        easing: Easing.linear,
+        useNativeDriver: false,
+      }).start();
+    }
+  }, [isLoading, spinValue]);
+
+  const spin = spinValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'],
+  });
+
   return (
     <Container>
       {isLoading && (
         <>
-          <Icon name="cog" size={100} />
+          <Animated.View style={{ transform: [{ rotate: spin }] }}>
+            <Icon name="cog" size={100} />
+          </Animated.View>
           <EmptyText>Carregando</EmptyText>
         </>
       )}
