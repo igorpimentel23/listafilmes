@@ -7,7 +7,7 @@ import Input from '../Input';
 import Button from '../Button';
 
 import { Container, Title, FormStyled } from './styles';
-import storeSearch from '../../store/modules/search/actions';
+import { fetchMovies } from '../../store/modules/movie/actions';
 
 const ListHeader: React.FC = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const ListHeader: React.FC = () => {
 
   const handleSearch = useCallback(
     query => {
-      dispatch(storeSearch(query.search));
+      dispatch(fetchMovies(query.search));
     },
     [dispatch],
   );

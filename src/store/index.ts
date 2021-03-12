@@ -5,7 +5,7 @@ import { IItemsArray } from '../@types';
 import rootReducer from './modules/rootReducer';
 
 export interface IState {
-  search: IItemsArray;
+  movie: IItemsArray;
 }
 
 const store = createStore(rootReducer, applyMiddleware(thunk, promise));

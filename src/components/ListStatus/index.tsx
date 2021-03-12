@@ -13,12 +13,14 @@ const ListEmpty: React.FC<IListProps> = ({ isEmpty, isLoading, hasError }) => {
 
   useEffect(() => {
     if (isLoading) {
-      Animated.timing(spinValue, {
-        toValue: 1,
-        duration: 1000,
-        easing: Easing.linear,
-        useNativeDriver: false,
-      }).start();
+      Animated.loop(
+        Animated.timing(spinValue, {
+          toValue: 1,
+          duration: 2000,
+          easing: Easing.linear,
+          useNativeDriver: true,
+        }),
+      ).start();
     }
   }, [isLoading, spinValue]);
 

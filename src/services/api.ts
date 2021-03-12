@@ -1,9 +1,11 @@
 import axios from 'axios';
 
+import configs from '../config';
+
 export const apiTrakt = axios.create({
-  baseURL: 'https://api.trakt.tv',
+  baseURL: configs.traktApiUrl,
 });
 
 export const apiTmdb = axios.create({
-  baseURL: 'https://api.themoviedb.org/3',
+  baseURL: configs.tmdbApiUrl,
 });

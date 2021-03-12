@@ -25,6 +25,7 @@
     "eslint-plugin-react-hooks": "^4",
     "react": "17.0.1",
     "react-native": "0.63.4",
+    "react-native-config": "^1.4.2",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-vector-icons": "^8.1.0",

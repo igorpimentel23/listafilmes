@@ -7,7 +7,7 @@ const INITIAL_STATE: IItemsArray = {
   hasError: null,
 };
 
-const search: Reducer<IItemsArray> = (state = INITIAL_STATE, action) => {
+const movie: Reducer<IItemsArray> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'FETCH_MOVIES_PENDING': {
       return {
@@ -19,7 +19,7 @@ const search: Reducer<IItemsArray> = (state = INITIAL_STATE, action) => {
     }
 
     case 'FETCH_MOVIES_FULFILLED': {
-      const items = action.payload;
+      const items = action.payload.data;
 
       return {
         ...state,
@@ -38,10 +38,27 @@ const search: Reducer<IItemsArray> = (state = INITIAL_STATE, action) => {
       };
     }
 
+    case 'APPEND_MOVIE_POSTER_FULFILLED': {
+      const newItems = state.items.map(item => {
+        if (item.movie?.ids?.tmdb === action.payload.tmdbId) {
+          const newItem = item;
+          newItem.movie.poster = action.payload.poster;
+
+          return newItem;
+        }
+        return item;
+      });
+
+      return {
+        ...state,
+        items: newItems,
+      };
+    }
+
     default: {
       return state;
     }
   }
 };
 
-export default search;
+export default movie;
