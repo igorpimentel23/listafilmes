@@ -1,14 +1,13 @@
 import React, { useEffect, useRef } from 'react';
-import { Animated, Easing, View } from 'react-native';
-import { Container, Icon, EmptyText } from './styles';
+import { Animated, Easing } from 'react-native';
+import { Container, Icon } from './styles';
 
 interface IListProps {
-  isEmpty: boolean;
   isLoading: boolean;
   hasError: boolean;
 }
 
-const ListStatus: React.FC<IListProps> = ({ isEmpty, isLoading, hasError }) => {
+const SmallListStatus: React.FC<IListProps> = ({ isLoading, hasError }) => {
   const spinValue = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -34,25 +33,17 @@ const ListStatus: React.FC<IListProps> = ({ isEmpty, isLoading, hasError }) => {
       {isLoading && (
         <>
           <Animated.View style={{ transform: [{ rotate: spin }] }}>
-            <Icon name="cog" size={100} />
+            <Icon name="cog" size={25} />
           </Animated.View>
-          <EmptyText>Carregando</EmptyText>
         </>
       )}
       {hasError && !isLoading && (
         <>
-          <Icon name="skull-crossbones" size={100} />
-          <EmptyText>Erro</EmptyText>
-        </>
-      )}
-      {isEmpty && !isLoading && !hasError && (
-        <>
-          <Icon name="movie-search" size={100} />
-          <EmptyText>Nada para mostrar</EmptyText>
+          <Icon name="skull-crossbones" size={20} />
         </>
       )}
     </Container>
   );
 };
 
-export default ListStatus;
+export default SmallListStatus;

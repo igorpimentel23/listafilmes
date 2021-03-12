@@ -4,7 +4,10 @@ import { Form } from '@unform/mobile';
 export const Container = styled.View`
   align-items: center;
   justify-content: center;
-  padding: 40px 1% 15px;
+  padding: 40px 24px 15px;
+  background: #312e38;
+  border-bottom-color: #232129;
+  border-bottom-width: 1px;
 `;
 
 export const Title = styled.Text`

@@ -18,7 +18,12 @@ export interface Item {
 export interface IItemsArray {
   items: Item[];
   isLoading: boolean;
-  hasError: AnyAction | null;
+  hasError: boolean;
+  smallLoading: boolean;
+  smallError: boolean;
+  page: number;
+  maxPage: number;
+  query: string;
 }
 
 export interface ApiResponse {

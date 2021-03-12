@@ -11,10 +11,12 @@ interface GetResponse extends ApiResponse {
   data: Item[];
 }
 
-export const getMovies = (query: string): Promise<GetResponse> =>
+export const getMovies = (query: string, page = 1): Promise<GetResponse> =>
   apiTrakt.get('/search/movie', {
     params: {
       query,
+      page,
+      limit: 12,
       extended: 'full',
     },
     headers: {

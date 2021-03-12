@@ -4,7 +4,12 @@ import { IItemsArray } from '../../../@types';
 const INITIAL_STATE: IItemsArray = {
   items: [],
   isLoading: false,
-  hasError: null,
+  hasError: false,
+  smallLoading: false,
+  smallError: false,
+  page: 1,
+  maxPage: 1,
+  query: '',
 };
 
 const movie: Reducer<IItemsArray> = (state = INITIAL_STATE, action) => {
@@ -13,18 +18,26 @@ const movie: Reducer<IItemsArray> = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isLoading: true,
-        hasError: null,
+        hasError: false,
+        page: 1,
+        maxPage: 1,
+        query: '',
         items: [],
       };
     }
 
     case 'FETCH_MOVIES_FULFILLED': {
       const items = action.payload.data;
+      const { query, page } = action.payload.config.params;
+      const maxPage = action.payload.headers['x-pagination-page-count'];
 
       return {
         ...state,
         isLoading: false,
-        hasError: null,
+        hasError: false,
+        page,
+        maxPage,
+        query,
         items,
       };
     }
@@ -33,7 +46,10 @@ const movie: Reducer<IItemsArray> = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isLoading: false,
-        hasError: action.error,
+        hasError: true,
+        page: 1,
+        maxPage: 1,
+        query: '',
         items: [],
       };
     }
@@ -52,6 +68,35 @@ const movie: Reducer<IItemsArray> = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         items: newItems,
+      };
+    }
+
+    case 'FETCH_NEXT_MOVIE_PAGE_PENDING': {
+      return {
+        ...state,
+        smallLoading: true,
+        smallError: false,
+      };
+    }
+
+    case 'FETCH_NEXT_MOVIE_PAGE_FULFILLED': {
+      const newItems = action.payload.data;
+      const { page } = action.payload.config.params;
+
+      return {
+        ...state,
+        page,
+        items: state.items.concat(newItems),
+        smallLoading: false,
+        smallError: false,
+      };
+    }
+
+    case 'FETCH_NEXT_MOVIE_PAGE_REJECTED': {
+      return {
+        ...state,
+        smallLoading: false,
+        smallError: true,
       };
     }
 
