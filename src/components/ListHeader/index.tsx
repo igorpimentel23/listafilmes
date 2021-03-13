@@ -32,7 +32,7 @@ const ListHeader: React.FC = () => {
           ref={searchInputRef}
           name="search"
           icon="search"
-          placeholder="Nome do filme ou série"
+          placeholder="Nome do filme"
           returnKeyType="send"
           onSubmitEditing={() => {
             formRef.current?.submitForm();

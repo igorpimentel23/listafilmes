@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Animated, Easing, View } from 'react-native';
+import { Animated, Easing } from 'react-native';
 import { Container, Icon, EmptyText } from './styles';
 
 interface IListProps {

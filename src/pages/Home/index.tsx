@@ -39,6 +39,7 @@ const Home: React.FC = () => {
 
   return (
     <ItemsList
+      testID="items-list"
       data={items}
       columnWrapperStyle={{ paddingRight: 24, paddingLeft: 24 }}
       ListHeaderComponent={<ListHeader />}

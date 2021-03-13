@@ -47,6 +47,15 @@ Para executar o App em um sistema IOS, execute:
 yarn ios
 ```
 
+## Executando testes
+
+Para executar os testes automatizados da aplicação, na pasta raiz da aplicação, executar:
+
+```
+yarn test
+```
+
+
 ## Autores
 
 * **Igor Pimentel** - *Trabalho inicial* - [igorpimentel23](https://github.com/igorpimentel23)

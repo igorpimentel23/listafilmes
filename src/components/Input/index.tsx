@@ -60,14 +60,6 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
       name: fieldName,
       ref: inputValueRef.current,
       path: 'value',
-      setValue(value) {
-        inputValueRef.current.value = value;
-        inputElementRef.current.setNativeProps({ text: value });
-      },
-      clearValue() {
-        inputValueRef.current.value = '';
-        inputElementRef.current.clear();
-      },
     });
   }, [fieldName, registerField]);
 
@@ -79,6 +71,7 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
         color={
           focused || isFocused || filled || isFilled ? '#ff9000' : '#666360'
         }
+        testID="input-container"
       />
 
       <TextInput

@@ -47,11 +47,15 @@ const MovieCard: React.FC<IMovieCardProps> = ({ movie }) => {
           </CardTitle>
           <CardYear>
             <Icon name="calendar-today" />
-            <CardYearText>{movie.year || '---'}</CardYearText>
+            <CardYearText testID="movie-year">
+              {movie.year || '---'}
+            </CardYearText>
           </CardYear>
           <CardRating>
             <Icon name="star" />
-            <CardRatingText>{movie.rating?.toFixed(2)}</CardRatingText>
+            <CardRatingText testID="movie-rating">
+              {movie.rating?.toFixed(2)}
+            </CardRatingText>
           </CardRating>
         </CardMeta>
       </CardContainer>

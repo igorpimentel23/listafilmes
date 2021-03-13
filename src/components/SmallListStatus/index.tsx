@@ -33,13 +33,13 @@ const SmallListStatus: React.FC<IListProps> = ({ isLoading, hasError }) => {
       {isLoading && (
         <>
           <Animated.View style={{ transform: [{ rotate: spin }] }}>
-            <Icon name="cog" size={25} />
+            <Icon testID="loading" name="cog" size={25} />
           </Animated.View>
         </>
       )}
       {hasError && !isLoading && (
         <>
-          <Icon name="skull-crossbones" size={20} />
+          <Icon testID="error" name="skull-crossbones" size={20} />
         </>
       )}
     </Container>
